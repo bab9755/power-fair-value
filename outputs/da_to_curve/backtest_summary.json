@@ -1,0 +1,14 @@
+{
+  "total_days": 774,
+  "active_days": 657,
+  "participation_rate": "84.9%",
+  "total_pnl_eur_mwh": 16928.48,
+  "avg_daily_pnl": 25.77,
+  "win_rate": "97.4%",
+  "wins": 640,
+  "losses": 17,
+  "best_day": 269.74,
+  "worst_day": -8.13,
+  "sharpe_daily": 1.147,
+  "max_consec_losses": 2
+}

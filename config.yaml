@@ -1,0 +1,47 @@
+# QA Pipeline Configuration
+
+# Timezone handling
+timezone_policy: europe_berlin  # Options: "utc", "europe_berlin"
+dst_policy: allow_missing_spring_hour  # Options: "allow_missing_spring_hour", "reindex_and_impute"
+frequency: h  # Expected time series frequency
+
+# Missingness thresholds
+missingness:
+  warn_missing_pct: 5.0  # Warn if missing % exceeds this threshold
+  fail_missing_pct: 20.0  # Fail if missing % exceeds this threshold
+
+# Outlier detection thresholds
+outliers:
+  price_hard_min: -600.0  # Hard minimum for price (EUR/MWh)
+  price_hard_max: 1500.0  # Hard maximum for price (EUR/MWh)
+  price_extreme_percentile: 99.9  # Percentile threshold for extreme spikes
+
+# Consistency rules
+consistency:
+  renewable_sum_tolerance_pct: 1.0  # Allowed % mismatch in renewable generation sums
+  allow_negative_price: true  # Allow negative electricity prices
+  allow_negative_residual_load: true  # Allow negative residual load
+  forbid_negative_generation: true  # Forbid negative generation values
+
+# Target column requirements
+target_column: price_eur_mwh
+target_max_missing_pct: 0.0  # Maximum allowed missing % for target column
+
+# Required columns (all must be present)
+required_columns:
+  - timestamp
+  - price_eur_mwh
+  - price_neighbors_avg_eur_mwh
+  - load_mwh
+  - residual_load_mwh
+  - gen_total_mwh
+  - gen_pv_wind_mwh
+  - gen_wind_offshore_mwh
+  - gen_wind_onshore_mwh
+  - gen_solar_mwh
+  - gen_other_mwh
+
+# LLM configuration
+llm_provider: anthropic  # Options: "openai", "anthropic"
+llm_model: claude-sonnet-4-5-20250929
+llm_temperature: 0.0

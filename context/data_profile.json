@@ -1,0 +1,152 @@
+{
+  "shape": {
+    "rows": 64609,
+    "columns": 11
+  },
+  "columns": [
+    "timestamp",
+    "price_eur_mwh",
+    "price_neighbors_avg_eur_mwh",
+    "load_mwh",
+    "residual_load_mwh",
+    "gen_total_mwh",
+    "gen_pv_wind_mwh",
+    "gen_wind_offshore_mwh",
+    "gen_wind_onshore_mwh",
+    "gen_solar_mwh",
+    "gen_other_mwh"
+  ],
+  "memory_usage_mb": 5.422328948974609,
+  "date_range": {
+    "start": "2018-10-01 00:00:00+02:00",
+    "end": "2026-02-12 23:00:00+01:00",
+    "duration_days": 2692
+  },
+  "columns_detail": {
+    "timestamp": {
+      "dtype": "datetime64[us, Europe/Berlin]",
+      "missing_count": 0,
+      "missing_pct": 0.0
+    },
+    "price_eur_mwh": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "min": -500.0,
+      "max": 936.28,
+      "mean": 93.5550516181956,
+      "median": 72.81,
+      "std": 91.92081602220573,
+      "negative_count": 2079,
+      "zero_count": 190
+    },
+    "price_neighbors_avg_eur_mwh": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "min": -152.18,
+      "max": 819.36,
+      "mean": 91.24808039152784,
+      "median": 69.99,
+      "std": 82.5968902983247,
+      "negative_count": 577,
+      "zero_count": 2
+    },
+    "load_mwh": {
+      "dtype": "float64",
+      "missing_count": 386,
+      "missing_pct": 0.597439985141389,
+      "min": 30893.25,
+      "max": 78154.25,
+      "mean": 54785.97224470445,
+      "median": 54518.0,
+      "std": 9261.40007355418,
+      "negative_count": 0,
+      "zero_count": 0
+    },
+    "residual_load_mwh": {
+      "dtype": "float64",
+      "missing_count": 386,
+      "missing_pct": 0.597439985141389,
+      "min": -13601.75,
+      "max": 70888.25,
+      "mean": 33880.89373640666,
+      "median": 34805.0,
+      "std": 13318.967725972352,
+      "negative_count": 491,
+      "zero_count": 0
+    },
+    "gen_total_mwh": {
+      "dtype": "float64",
+      "missing_count": 1418,
+      "missing_pct": 2.1947406708043773,
+      "min": 20072.0,
+      "max": 87604.0,
+      "mean": 53179.73893985502,
+      "median": 53266.0,
+      "std": 11663.150460496361,
+      "negative_count": 0,
+      "zero_count": 0
+    },
+    "gen_pv_wind_mwh": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "min": 325.25,
+      "max": 75034.25,
+      "mean": 20925.335741769723,
+      "median": 19089.0,
+      "std": 12724.376236565437,
+      "negative_count": 0,
+      "zero_count": 0
+    },
+    "gen_wind_offshore_mwh": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "min": 13.0,
+      "max": 7344.19,
+      "mean": 2896.6426026559766,
+      "median": 2766.0,
+      "std": 1866.1840852212513,
+      "negative_count": 0,
+      "zero_count": 0
+    },
+    "gen_wind_onshore_mwh": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "min": 161.25,
+      "max": 46769.25,
+      "mean": 11971.173418873532,
+      "median": 9235.0,
+      "std": 9382.917418371078,
+      "negative_count": 0,
+      "zero_count": 0
+    },
+    "gen_solar_mwh": {
+      "dtype": "float64",
+      "missing_count": 0,
+      "missing_pct": 0.0,
+      "min": 0.0,
+      "max": 50917.75,
+      "mean": 6057.528902165333,
+      "median": 182.75,
+      "std": 9538.581228027246,
+      "negative_count": 0,
+      "zero_count": 28204
+    },
+    "gen_other_mwh": {
+      "dtype": "float64",
+      "missing_count": 1418,
+      "missing_pct": 2.1947406708043773,
+      "min": 1205.25,
+      "max": 66144.5,
+      "mean": 32224.386341420322,
+      "median": 31456.75,
+      "std": 10165.326387859735,
+      "negative_count": 0,
+      "zero_count": 0
+    }
+  }
+}

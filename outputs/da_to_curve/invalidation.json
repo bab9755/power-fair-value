@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "block_mae": {
+      "metric": "Base block MAE (last 14d)",
+      "threshold": "> 30.0 EUR/MWh",
+      "current": "6.04 EUR/MWh",
+      "triggered": false
+    },
+    "error_trend": {
+      "metric": "Error trajectory (2nd half vs 1st half of lookback)",
+      "threshold": "Increasing > 20%",
+      "current": "Stable",
+      "triggered": false
+    },
+    "consecutive_losses": {
+      "metric": "Consecutive losing days",
+      "threshold": "> 3 days",
+      "current": "1 days",
+      "triggered": false
+    },
+    "extreme_price_event": {
+      "metric": "Actual / Proxy ratio",
+      "threshold": "> 2.0x or < 0.3x (supply shock / demand collapse)",
+      "current": "Normal",
+      "triggered": false
+    }
+  },
+  "invalidation_triggered": false,
+  "recommended_action": "MAINTAIN positions",
+  "lookback_days": 14
+}

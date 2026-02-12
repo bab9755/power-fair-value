@@ -1,0 +1,63 @@
+# Example Remediation Pipeline Configuration
+# Copy this file and customize for your needs
+
+# Missing data imputation policies
+missing_data:
+  # Thresholds for different strategies
+  threshold_interpolate: 5.0  # Use interpolation if less than 5% missing
+  threshold_model_based: 15.0  # Use ML-based methods if 5-15% missing
+  threshold_drop: 25.0  # Consider dropping column if > 25% missing
+  
+  # Column-specific strategies
+  # Each column can have a custom imputation method
+  strategies:
+    # Price neighbor column - use correlation with main price
+    price_neighbors_avg_eur_mwh:
+      method: correlation_regression
+      reference: price_eur_mwh
+    
+    # Total generation - calculate from components
+    gen_total_mwh:
+      method: calculate_from_components
+      components:
+        - gen_pv_wind_mwh
+        - gen_other_mwh
+    
+    # Load - use seasonal patterns
+    load_mwh:
+      method: seasonal_decomposition
+      period: weekly
+    
+    # Other generation - use seasonal naive
+    gen_other_mwh:
+      method: seasonal_naive
+      period: weekly
+
+# Time series handling
+time_series:
+  max_gap_hours: 24  # Maximum gap size to interpolate automatically
+  interpolation_method: linear  # Method for interpolation (linear, polynomial, spline)
+  handle_long_gaps: flag_for_review  # What to do with gaps > max_gap_hours
+                                      # Options: flag_for_review, interpolate, drop
+
+# Outlier handling
+outliers:
+  allow_negative_prices: true  # Allow negative prices (valid in energy markets!)
+  winsorize_extremes: false  # Cap extreme values at percentile
+  price_cap_percentile: 99.9  # Percentile to cap at (if winsorizing)
+
+# Validation settings
+validation:
+  rerun_qa_after_fix: true  # Re-run QA checks after applying fixes
+  max_iterations: 3  # Maximum remediation iterations
+  fail_if_not_ready: false  # Exit with error if not training-ready after max iterations
+
+# General settings
+dry_run: false  # If true, show what would be fixed without applying
+interactive: false  # If true, ask before each fix
+backup_original: true  # Create backup of original dataset
+
+# LLM configuration
+llm_provider: anthropic  # LLM provider: 'openai' or 'anthropic'
+llm_model: claude-3-5-sonnet-20241022  # Model to use
+llm_temperature: 0.0  # Temperature for LLM (0 = deterministic)

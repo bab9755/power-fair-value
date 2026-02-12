@@ -1,0 +1,484 @@
+{
+  "checks": [
+    {
+      "id": "schema_types",
+      "name": "Schema & Types Validation",
+      "status": "PASS",
+      "metrics": {
+        "columns_count": 11,
+        "missing_required": [],
+        "extra_columns": [],
+        "timestamp_is_datetime": true,
+        "non_numeric_columns": []
+      },
+      "thresholds": {
+        "required_columns": [
+          "timestamp",
+          "price_eur_mwh",
+          "price_neighbors_avg_eur_mwh",
+          "load_mwh",
+          "residual_load_mwh",
+          "gen_total_mwh",
+          "gen_pv_wind_mwh",
+          "gen_wind_offshore_mwh",
+          "gen_wind_onshore_mwh",
+          "gen_solar_mwh",
+          "gen_other_mwh"
+        ]
+      },
+      "message": "Schema and types are valid",
+      "recommendation": ""
+    },
+    {
+      "id": "time_series_integrity",
+      "name": "Time Series Integrity",
+      "status": "FAIL",
+      "metrics": {
+        "is_monotonic_increasing": true,
+        "duplicate_count": 0,
+        "frequency_anomalies": 8,
+        "missing_timestamps_total": 8,
+        "dst_spring_gaps": 0,
+        "unexpected_gaps": 8
+      },
+      "thresholds": {
+        "expected_frequency": "h",
+        "dst_policy": "allow_missing_spring_hour"
+      },
+      "message": "Unexpected missing timestamps found",
+      "recommendation": "Remove duplicates and ensure monotonic timestamps"
+    },
+    {
+      "id": "missingness",
+      "name": "Missing Data Analysis",
+      "status": "WARN",
+      "metrics": {
+        "per_column": {
+          "price_eur_mwh": {
+            "count": 0,
+            "percent": 0.0
+          },
+          "price_neighbors_avg_eur_mwh": {
+            "count": 9959,
+            "percent": 15.42
+          },
+          "load_mwh": {
+            "count": 1035,
+            "percent": 1.6
+          },
+          "residual_load_mwh": {
+            "count": 1036,
+            "percent": 1.6
+          },
+          "gen_total_mwh": {
+            "count": 3648,
+            "percent": 5.65
+          },
+          "gen_pv_wind_mwh": {
+            "count": 3,
+            "percent": 0.0
+          },
+          "gen_wind_offshore_mwh": {
+            "count": 0,
+            "percent": 0.0
+          },
+          "gen_wind_onshore_mwh": {
+            "count": 3,
+            "percent": 0.0
+          },
+          "gen_solar_mwh": {
+            "count": 3,
+            "percent": 0.0
+          },
+          "gen_other_mwh": {
+            "count": 1688,
+            "percent": 2.61
+          }
+        },
+        "fail_threshold_exceeded": [],
+        "warn_threshold_exceeded": [
+          "price_neighbors_avg_eur_mwh",
+          "gen_total_mwh"
+        ],
+        "temporal_clustering": {
+          "price_neighbors_avg_eur_mwh": {
+            "months_affected": 14,
+            "top_months": {
+              "2018-10": 744,
+              "2018-12": 744,
+              "2019-01": 744
+            }
+          },
+          "load_mwh": {
+            "months_affected": 3,
+            "top_months": {
+              "2018-12": 360,
+              "2018-10": 241,
+              "2018-11": 240
+            }
+          },
+          "residual_load_mwh": {
+            "months_affected": 3,
+            "top_months": {
+              "2018-12": 360,
+              "2018-10": 241,
+              "2018-11": 240
+            }
+          },
+          "gen_total_mwh": {
+            "months_affected": 5,
+            "top_months": {
+              "2018-10": 744,
+              "2018-11": 720,
+              "2018-12": 720
+            }
+          },
+          "gen_other_mwh": {
+            "months_affected": 3,
+            "top_months": {
+              "2018-12": 720,
+              "2024-10": 720,
+              "2023-10": 199
+            }
+          }
+        }
+      },
+      "thresholds": {
+        "warn_pct": 5.0,
+        "fail_pct": 20.0
+      },
+      "message": "Elevated missing data in 2 column(s)",
+      "recommendation": "Review columns with high missingness: price_neighbors_avg_eur_mwh, gen_total_mwh"
+    },
+    {
+      "id": "value_sanity",
+      "name": "Value Sanity Checks",
+      "status": "PASS",
+      "metrics": {
+        "price_eur_mwh": {
+          "min": -500.0,
+          "max": 936.28,
+          "mean": 93.56244655655485,
+          "median": 72.82,
+          "negative_rate_pct": 3.21,
+          "extreme_spikes_count": 65,
+          "extreme_threshold": 686.458000000005,
+          "out_of_bounds_count": 0
+        },
+        "load_mwh": {
+          "min": 30893.25,
+          "max": 78154.25,
+          "mean": 54853.14814727999,
+          "negative_count": 0
+        },
+        "residual_load_mwh": {
+          "min": -13601.75,
+          "max": 70888.25,
+          "mean": 33900.29419806497,
+          "negative_count": 491
+        },
+        "gen_total_mwh": {
+          "min": 20072.0,
+          "max": 87604.0,
+          "mean": 53029.64266713697,
+          "negative_count": 0
+        },
+        "gen_pv_wind_mwh": {
+          "min": 325.25,
+          "max": 75034.25,
+          "mean": 20924.838707080715,
+          "negative_count": 0
+        },
+        "gen_wind_offshore_mwh": {
+          "min": 13.0,
+          "max": 7344.19,
+          "mean": 2896.511857091996,
+          "negative_count": 0
+        },
+        "gen_wind_onshore_mwh": {
+          "min": 161.25,
+          "max": 46769.25,
+          "mean": 11969.846360723242,
+          "negative_count": 0
+        },
+        "gen_solar_mwh": {
+          "min": 0.0,
+          "max": 50917.75,
+          "mean": 6058.560401870028,
+          "negative_count": 0
+        },
+        "gen_other_mwh": {
+          "min": 1205.25,
+          "max": 66144.5,
+          "mean": 32248.895160300734,
+          "negative_count": 0
+        }
+      },
+      "thresholds": {
+        "price_hard_min": -600.0,
+        "price_hard_max": 1500.0,
+        "price_extreme_percentile": 99.9
+      },
+      "message": "Value ranges are reasonable",
+      "recommendation": ""
+    },
+    {
+      "id": "cross_field_consistency",
+      "name": "Cross-Field Consistency",
+      "status": "PASS",
+      "metrics": {
+        "renewable_sum": {
+          "rows_checked": 64598,
+          "mismatches": 0,
+          "mismatch_rate_pct": 0.0,
+          "mean_rel_diff_pct": 0.0,
+          "max_rel_diff_pct": 0.0
+        },
+        "total_gen": {
+          "rows_checked": 60952,
+          "correlation": 1.0,
+          "mean_rel_diff_pct": 0.0,
+          "max_rel_diff_pct": 0.0
+        }
+      },
+      "thresholds": {
+        "renewable_sum_tolerance_pct": 1.0
+      },
+      "message": "Cross-field consistency OK",
+      "recommendation": ""
+    },
+    {
+      "id": "target_readiness",
+      "name": "Target Column Readiness",
+      "status": "PASS",
+      "metrics": {
+        "column_exists": true,
+        "missing_count": 0,
+        "missing_pct": 0.0
+      },
+      "thresholds": {
+        "max_missing_pct": 0.0
+      },
+      "message": "Target column ready (missing: 0.00%)",
+      "recommendation": ""
+    }
+  ],
+  "cleaning_actions": [
+    {
+      "action": "Parse timestamp column to datetime",
+      "type": "transform",
+      "params": {
+        "column": "timestamp"
+      },
+      "before": {
+        "dtype": "object"
+      },
+      "after": {
+        "dtype": "datetime64[us]"
+      }
+    },
+    {
+      "action": "Sort by timestamp ascending",
+      "type": "sort",
+      "params": {
+        "column": "timestamp"
+      },
+      "before": {
+        "rows": 64601
+      },
+      "after": {
+        "rows": 64601
+      }
+    },
+    {
+      "action": "Localize timestamps to Europe/Berlin (DST ambiguous times handled)",
+      "type": "transform",
+      "params": {
+        "timezone": "Europe/Berlin",
+        "ambiguous": "first_occurrence",
+        "dst_ambiguous_count": 8
+      },
+      "before": {
+        "tz": "naive"
+      },
+      "after": {
+        "tz": "Europe/Berlin"
+      }
+    },
+    {
+      "action": "Identified unexpected missing timestamps",
+      "type": "identify",
+      "params": {
+        "count": 8,
+        "first_10": [
+          "2018-10-28 02:00:00+01:00",
+          "2019-10-27 02:00:00+01:00",
+          "2020-10-25 02:00:00+01:00",
+          "2021-10-31 02:00:00+01:00",
+          "2022-10-30 02:00:00+01:00",
+          "2023-10-29 02:00:00+01:00",
+          "2024-10-27 02:00:00+01:00",
+          "2025-10-26 02:00:00+01:00"
+        ]
+      },
+      "before": {
+        "rows": 64601
+      },
+      "after": {
+        "unexpected_gaps": 8
+      }
+    }
+  ],
+  "dataset_profile": {
+    "shape": {
+      "rows": 64601,
+      "columns": 11
+    },
+    "columns": [
+      "timestamp",
+      "price_eur_mwh",
+      "price_neighbors_avg_eur_mwh",
+      "load_mwh",
+      "residual_load_mwh",
+      "gen_total_mwh",
+      "gen_pv_wind_mwh",
+      "gen_wind_offshore_mwh",
+      "gen_wind_onshore_mwh",
+      "gen_solar_mwh",
+      "gen_other_mwh"
+    ],
+    "memory_usage_mb": 5.421657562255859,
+    "date_range": {
+      "start": "2018-10-01 00:00:00+02:00",
+      "end": "2026-02-12 23:00:00+01:00",
+      "duration_days": 2692
+    },
+    "columns_detail": {
+      "timestamp": {
+        "dtype": "datetime64[us, Europe/Berlin]",
+        "missing_count": 0,
+        "missing_pct": 0.0
+      },
+      "price_eur_mwh": {
+        "dtype": "float64",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "min": -500.0,
+        "max": 936.28,
+        "mean": 93.56244655655485,
+        "median": 72.82,
+        "std": 91.92300270774659,
+        "negative_count": 2076,
+        "zero_count": 190
+      },
+      "price_neighbors_avg_eur_mwh": {
+        "dtype": "float64",
+        "missing_count": 9959,
+        "missing_pct": 15.416170028327736,
+        "min": -152.18,
+        "max": 819.36,
+        "mean": 99.64572856044798,
+        "median": 80.33,
+        "std": 86.99116973150852,
+        "negative_count": 503,
+        "zero_count": 2
+      },
+      "load_mwh": {
+        "dtype": "float64",
+        "missing_count": 1035,
+        "missing_pct": 1.6021423816968778,
+        "min": 30893.25,
+        "max": 78154.25,
+        "mean": 54853.14814727999,
+        "median": 54682.375,
+        "std": 9276.29399077691,
+        "negative_count": 0,
+        "zero_count": 0
+      },
+      "residual_load_mwh": {
+        "dtype": "float64",
+        "missing_count": 1036,
+        "missing_pct": 1.603690345350691,
+        "min": -13601.75,
+        "max": 70888.25,
+        "mean": 33900.29419806497,
+        "median": 34831.5,
+        "std": 13346.995120268302,
+        "negative_count": 491,
+        "zero_count": 0
+      },
+      "gen_total_mwh": {
+        "dtype": "float64",
+        "missing_count": 3648,
+        "missing_pct": 5.646971409111314,
+        "min": 20072.0,
+        "max": 87604.0,
+        "mean": 53029.64266713697,
+        "median": 53097.0,
+        "std": 11666.495674957117,
+        "negative_count": 0,
+        "zero_count": 0
+      },
+      "gen_pv_wind_mwh": {
+        "dtype": "float64",
+        "missing_count": 3,
+        "missing_pct": 0.0046438909614402255,
+        "min": 325.25,
+        "max": 75034.25,
+        "mean": 20924.838707080715,
+        "median": 19088.625,
+        "std": 12724.60417011586,
+        "negative_count": 0,
+        "zero_count": 0
+      },
+      "gen_wind_offshore_mwh": {
+        "dtype": "float64",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "min": 13.0,
+        "max": 7344.19,
+        "mean": 2896.511857091996,
+        "median": 2766.0,
+        "std": 1866.1591328754084,
+        "negative_count": 0,
+        "zero_count": 0
+      },
+      "gen_wind_onshore_mwh": {
+        "dtype": "float64",
+        "missing_count": 3,
+        "missing_pct": 0.0046438909614402255,
+        "min": 161.25,
+        "max": 46769.25,
+        "mean": 11969.846360723242,
+        "median": 9234.16,
+        "std": 9382.369648114,
+        "negative_count": 0,
+        "zero_count": 0
+      },
+      "gen_solar_mwh": {
+        "dtype": "float64",
+        "missing_count": 3,
+        "missing_pct": 0.0046438909614402255,
+        "min": 0.0,
+        "max": 50917.75,
+        "mean": 6058.560401870028,
+        "median": 183.75,
+        "std": 9539.065771096984,
+        "negative_count": 0,
+        "zero_count": 28193
+      },
+      "gen_other_mwh": {
+        "dtype": "float64",
+        "missing_count": 1688,
+        "missing_pct": 2.6129626476370333,
+        "min": 1205.25,
+        "max": 66144.5,
+        "mean": 32248.895160300734,
+        "median": 31474.29,
+        "std": 10164.263897136121,
+        "negative_count": 0,
+        "zero_count": 0
+      }
+    }
+  }
+}
