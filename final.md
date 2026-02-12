@@ -198,9 +198,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 1. **Forecast vs actual (time series)**  
 
-   ```markdown
    ![LightGBM forecasts vs actual prices](outputs/lightgbm_forecast_vs_actual.png)
-   ```
 
    - Shows **actual hourly DA prices vs LightGBM predictions** over the tail of the test period (~1000 hours).
    - Visual check:  
@@ -209,9 +207,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 2. **Scatter: actual vs predicted**  
 
-   ```markdown
    ![LightGBM actual vs predicted scatter](outputs/lightgbm_y_true_vs_pred_scatter.png)
-   ```
 
    - Scatter of `y_true` vs `y_pred__LightGBM` with a **45° reference line**.
    - Points cluster tightly around the diagonal, with slightly more spread at extreme price levels, indicating:
@@ -220,9 +216,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 3. **Residual histogram**  
 
-   ```markdown
    ![LightGBM residual distribution](outputs/lightgbm_residual_hist.png)
-   ```
 
    - Histogram of residuals (`actual – prediction`) on the test set.
    - Near-symmetric with a modest left tail, confirming:
@@ -231,9 +225,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 4. **MAE by delivery hour**  
 
-   ```markdown
    ![LightGBM MAE by hour of day](outputs/lightgbm_mae_by_hour.png)
-   ```
 
    - Bars show MAE for LightGBM by hour-of-day (0–23).
    - Interpretation:
@@ -243,9 +235,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 5. **Feature importance (global LightGBM)**  
 
-   ```markdown
    ![LightGBM feature importance](outputs/lightgbm_feature_importance.png)
-   ```
 
    - Top 20 features from a global LightGBM model trained on the full training set.
    - Patterns:
@@ -257,9 +247,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 1. **Monthly fair value curve**  
 
-   ```markdown
    ![Monthly fair value vs realised settlement](outputs/da_to_curve/monthly_fair_value_curve.png)
-   ```
 
    - Plots **model fair value vs realised monthly settlement** for base and peak products.
    - Shows that:
@@ -268,9 +256,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 2. **Spreads and signals**  
 
-   ```markdown
    ![Daily spread and trading signals](outputs/da_to_curve/spread_and_signals.png)
-   ```
 
    - Daily **spread between model FV and proxy curve**, overlaid with **BUY/SELL/HOLD markers**.
    - This is the core trading plot:
@@ -280,9 +266,7 @@ All plots below are produced directly by the pipeline and live under `outputs/` 
 
 3. **Block prices overview**  
 
-   ```markdown
    ![Block prices: actual vs forecast vs reference](outputs/da_to_curve/block_prices_overview.png)
-   ```
 
    - Daily Baseload/Peakload prices: **actual vs LightGBM forecast vs reference curve**.
    - Demonstrates:
